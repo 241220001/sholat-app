@@ -1,0 +1,53 @@
+# ============================================
+# DEPENDENCIES & PACKAGES
+# ============================================
+node_modules/
+vendor/
+composer.lock
+
+# ============================================
+# ENVIRONMENT & KONFIGURASI RAHASIA
+# ============================================
+.env
+.env.local
+.env.production
+config/database.php
+
+# ============================================
+# FILE UPLOAD USER (terlalu besar)
+# ============================================
+assets/audio/*.mp3
+assets/video/*.mp4
+assets/images/gerakan/*.jpg
+assets/images/gerakan/*.png
+
+# ============================================
+# FILE SISTEM OPERASI
+# ============================================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ============================================
+# EDITOR & IDE
+# ============================================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ============================================
+# FILE LOG & CACHE
+# ============================================
+*.log
+*.cache
+/storage/logs/
+/bootstrap/cache/
+
+# ============================================
+# FILE TEMPORARY
+# ============================================
+*.tmp
+*.temp
+*.bak
+*.swp
