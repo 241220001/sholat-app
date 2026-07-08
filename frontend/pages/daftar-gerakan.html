@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Gerakan Sholat | Tuntunan Tata Cara Sholat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600&family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body data-page="daftar-gerakan">
+    <header class="site-header">
+        <div class="header-container">
+            <a class="brand" href="index.html" aria-label="Beranda Tuntunan Tata Cara Sholat">
+                <span class="brand-mark" aria-hidden="true">۞</span>
+                <span>Tuntunan Sholat</span>
+            </a>
+
+            <div class="group-identity" aria-label="Identitas kelompok">
+                <span id="groupName">Kelompok 1</span>
+                <span id="groupProgram">Teknik Informatika</span>
+                <span id="groupCourse">Pengembangan Aplikasi Web</span>
+                <span id="groupLecturer">Dedy Susanto, S.Pd.I., M.M.</span>
+            </div>
+
+            <div class="mode-toggle" role="group" aria-label="Pilih mode tampilan">
+                <button class="mode-button is-active" type="button" data-mode="dewasa" aria-pressed="true">Dewasa</button>
+                <button class="mode-button" type="button" data-mode="anak" aria-pressed="false">Anak</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="movement-page">
+        <section class="movement-intro" aria-labelledby="movementTitle">
+            <div>
+                <p class="eyebrow">Daftar gerakan</p>
+                <h1 id="movementTitle">13 Gerakan Shalat</h1>
+                <p class="movement-copy">Pilih gerakan untuk membuka panduan detail sesuai mode tampilan aktif.</p>
+            </div>
+            <span class="active-mode-badge" id="activeModeBadge">Mode Dewasa</span>
+        </section>
+
+        <section class="movement-shell" aria-label="Daftar kartu gerakan sholat">
+            <div class="movement-grid" id="movementGrid" aria-live="polite"></div>
+        </section>
+    </main>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

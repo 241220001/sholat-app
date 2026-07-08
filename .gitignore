@@ -14,14 +14,6 @@ composer.lock
 config/database.php
 
 # ============================================
-# FILE UPLOAD USER (terlalu besar)
-# ============================================
-assets/audio/*.mp3
-assets/video/*.mp4
-assets/images/gerakan/*.jpg
-assets/images/gerakan/*.png
-
-# ============================================
 # FILE SISTEM OPERASI
 # ============================================
 .DS_Store

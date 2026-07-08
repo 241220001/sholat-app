@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tuntunan Tata Cara Sholat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-container">
+            <a class="brand" href="index.html" aria-label="Beranda Tuntunan Tata Cara Sholat">
+                <span class="brand-mark" aria-hidden="true">۞</span>
+                <span>Tuntunan Sholat</span>
+            </a>
+
+            <div class="group-identity" aria-label="Identitas kelompok">
+                <span id="groupName">Kelompok 1</span>
+                <span id="groupProgram">Teknik Informatika</span>
+                <span id="groupCourse">Pengembangan Aplikasi Web</span>
+                <span id="groupLecturer">Dedy Susanto, S.Pd.I., M.M.</span>
+            </div>
+
+            <div class="mode-toggle" role="group" aria-label="Pilih mode tampilan">
+                <button class="mode-button is-active" type="button" data-mode="dewasa" aria-pressed="true">Dewasa</button>
+                <button class="mode-button" type="button" data-mode="anak" aria-pressed="false">Anak</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" aria-labelledby="heroTitle">
+            <div class="hero-content">
+                <p class="eyebrow">Aplikasi edukasi ibadah</p>
+                <h1 id="heroTitle">Belajar Tata Cara Sholat Sesuai Sunnah</h1>
+                <p class="hero-copy">Panduan 13 gerakan sholat dengan rujukan Himpunan Putusan Tarjih (HPT) Muhammadiyah, disajikan tenang dan mudah dipelajari.</p>
+
+                <div class="hero-actions">
+                    <a class="primary-cta" id="startLearning" href="daftar-gerakan.html?kategori=dewasa">Mulai Belajar</a>
+                    <span class="active-mode-badge" id="activeModeBadge">Mode Dewasa</span>
+                </div>
+
+                <p class="trust-badge">
+                    <span aria-hidden="true">✓</span>
+                    Sumber: Himpunan Putusan Tarjih (HPT) Muhammadiyah
+                </p>
+            </div>
+
+            <div class="hero-visual" aria-label="Ilustrasi orang sedang sholat">
+                <div class="prayer-card">
+                    <img class="prayer-photo" src="../../assets/images/hero-prayer-placeholder.svg" alt="Placeholder foto gerakan sholat untuk halaman beranda">
+                    <p class="visual-caption">Qiyam → Salam</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>
