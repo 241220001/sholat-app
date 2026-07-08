@@ -13,4 +13,5 @@ class Response {
         echo json_encode(["status" => "error", "message" => $message, "code" => $code]);
         exit;
     }
+    
 }

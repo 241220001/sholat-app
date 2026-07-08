@@ -7,4 +7,5 @@ try {
     Response::success(["message" => "Koneksi database berhasil!"]);
 } catch (Exception $e) {
     Response::error("Koneksi database gagal", "DB_ERROR", 500);
+    
 }

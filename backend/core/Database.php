@@ -30,4 +30,5 @@ class Database {
         }
         return self::$instance->conn;
     }
+    
 }
