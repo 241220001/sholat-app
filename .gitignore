@@ -51,3 +51,9 @@ desktop.ini
 *.temp
 *.bak
 *.swp
+
+# ============================================
+# FILE AI ASSISTANT (LOKAL, TIDAK DI-PUSH)
+# ============================================
+Agent.md
+CLAUDE.md
