@@ -54,7 +54,7 @@ CREATE TABLE gerakan (
   video_url    VARCHAR(255) NULL,
   created_at   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-               ON UPDATE CURRENT_TIMESTAMP,
+              ON UPDATE CURRENT_TIMESTAMP,
 
   CONSTRAINT fk_gerakan_kategori
     FOREIGN KEY (id_kategori) REFERENCES kategori(id)
@@ -81,7 +81,7 @@ CREATE TABLE bacaan (
   sumber       VARCHAR(150) NULL,
   created_at   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-               ON UPDATE CURRENT_TIMESTAMP,
+              ON UPDATE CURRENT_TIMESTAMP,
 
   CONSTRAINT fk_bacaan_gerakan
     FOREIGN KEY (id_gerakan) REFERENCES gerakan(id)

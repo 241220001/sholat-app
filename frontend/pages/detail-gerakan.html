@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Gerakan Sholat | Tuntunan Tata Cara Sholat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .detail-page {
+            width: min(100%, 1200px);
+            padding: 32px 16px 120px;
+            margin: 0 auto;
+        }
+
+        .detail-container {
+            display: grid;
+            gap: 32px;
+            opacity: 1;
+            transition: opacity 200ms ease-in-out;
+        }
+
+        .detail-container.is-loading {
+            opacity: 0.4;
+        }
+
+        .gerakan-image-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 640px;
+            margin: 0 auto;
+            overflow: hidden;
+            background: linear-gradient(180deg, #FFFFFF 0%, #F8F5EC 100%);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .gerakan-image {
+            display: block;
+            width: 100%;
+            height: auto;
+            min-height: 320px;
+            object-fit: cover;
+        }
+
+        .bacaan-section {
+            display: grid;
+            gap: 24px;
+            padding: 32px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .bacaan-arab {
+            font-family: "Amiri", serif;
+            font-size: clamp(28px, 4vw, 36px);
+            font-weight: 400;
+            line-height: 2.2;
+            color: var(--text-primary);
+            text-align: right;
+            direction: rtl;
+        }
+
+        .bacaan-latin {
+            font-size: 16px;
+            font-style: italic;
+            line-height: 1.8;
+            color: var(--text-primary);
+        }
+
+        .bacaan-terjemahan {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text-muted);
+        }
+
+        .bacaan-sumber {
+            padding-top: 16px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--accent);
+            border-top: 1px solid var(--border);
+        }
+
+        .audio-player {
+            display: grid;
+            gap: 16px;
+            padding: 24px;
+            background: rgba(15, 110, 86, 0.04);
+            border: 1px solid rgba(15, 110, 86, 0.2);
+            border-radius: 12px;
+        }
+
+        .audio-controls {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .audio-btn {
+            display: grid;
+            width: 48px;
+            height: 48px;
+            place-items: center;
+            font-size: 20px;
+            color: var(--surface);
+            cursor: pointer;
+            background: var(--primary);
+            border: 0;
+            border-radius: 50%;
+            transition: background 150ms ease-out, transform 150ms ease-out;
+        }
+
+        .audio-btn:hover {
+            background: var(--secondary);
+            transform: scale(1.05);
+        }
+
+        .audio-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .audio-progress-wrapper {
+            flex: 1;
+            display: grid;
+            gap: 8px;
+        }
+
+        .audio-progress {
+            position: relative;
+            width: 100%;
+            height: 8px;
+            cursor: pointer;
+            background: rgba(15, 110, 86, 0.15);
+            border-radius: 999px;
+        }
+
+        .audio-progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: var(--primary);
+            border-radius: 999px;
+            transition: width 100ms linear;
+        }
+
+        .audio-time {
+            display: flex;
+            gap: 8px;
+            justify-content: space-between;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .video-section {
+            text-align: center;
+        }
+
+        .video-btn {
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+            min-height: 44px;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            background: transparent;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            transition: background 150ms ease-out, color 150ms ease-out;
+        }
+
+        .video-btn:hover {
+            color: var(--surface);
+            background: var(--primary);
+        }
+
+        .video-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            display: none;
+            place-items: center;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(4px);
+        }
+
+        .video-modal.is-open {
+            display: grid;
+        }
+
+        .video-modal-content {
+            position: relative;
+            width: min(90%, 960px);
+            max-height: 90vh;
+            background: #000;
+            border-radius: 12px;
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-close {
+            position: absolute;
+            top: -48px;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+            background: transparent;
+            border: 0;
+        }
+
+        .video-embed {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 12px;
+        }
+
+        .nav-sticky {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 10;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.95);
+            border-top: 1px solid var(--border);
+            backdrop-filter: blur(12px);
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+            min-height: 44px;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--surface);
+            cursor: pointer;
+            background: var(--primary);
+            border: 0;
+            border-radius: 8px;
+            transition: background 150ms ease-out;
+        }
+
+        .nav-btn:hover {
+            background: var(--secondary);
+        }
+
+        .nav-btn:disabled,
+        .nav-btn.is-disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .autoplay-toggle {
+            display: inline-flex;
+            gap: 6px;
+            align-items: center;
+            min-height: 44px;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: all 150ms ease-out;
+        }
+
+        .autoplay-toggle:hover {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .autoplay-toggle.is-active {
+            color: var(--primary);
+            background: rgba(15, 110, 86, 0.12);
+            border-color: var(--primary);
+        }
+
+        .autoplay-notification {
+            position: fixed;
+            top: 88px;
+            left: 50%;
+            z-index: 50;
+            padding: 12px 20px;
+            font-size: 14px;
+            color: var(--text-primary);
+            visibility: hidden;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            opacity: 0;
+            box-shadow: var(--shadow-elevated);
+            transform: translate(-50%, -16px);
+            transition: all 200ms ease-out;
+        }
+
+        .autoplay-notification.is-visible {
+            visibility: visible;
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+
+        @media (max-width: 768px) {
+            .detail-page {
+                padding: 24px 16px 120px;
+            }
+
+            .bacaan-section {
+                padding: 24px 16px;
+            }
+
+            .nav-sticky {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .nav-btn {
+                flex: 1;
+                min-width: 120px;
+                justify-content: center;
+            }
+
+            .autoplay-toggle {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body data-page="detail-gerakan">
+    <header class="site-header">
+        <div class="header-container">
+            <a class="brand" href="index.html" aria-label="Beranda Tuntunan Tata Cara Sholat">
+                <span class="brand-mark" aria-hidden="true">۞</span>
+                <span>Tuntunan Sholat</span>
+            </a>
+
+            <div class="group-identity" aria-label="Identitas kelompok">
+                <span id="groupName">Kelompok 1</span>
+                <span id="groupProgram">Teknik Informatika</span>
+                <span id="groupCourse">Pengembangan Aplikasi Web</span>
+                <span id="groupLecturer">Dedy Susanto, S.Pd.I., M.M.</span>
+            </div>
+
+            <div class="mode-toggle" role="group" aria-label="Pilih mode tampilan">
+                <button class="mode-button is-active" type="button" data-mode="dewasa" aria-pressed="true">Dewasa</button>
+                <button class="mode-button" type="button" data-mode="anak" aria-pressed="false">Anak</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="autoplay-notification" id="autoplayNotification" role="status" aria-live="polite"></div>
+
+    <main class="detail-page">
+        <div class="detail-container" id="detailContainer">
+            <div class="skeleton-card" style="min-height: 400px;"></div>
+        </div>
+    </main>
+
+    <div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Video gerakan sholat">
+        <div class="video-modal-content">
+            <button class="video-close" id="videoClose" aria-label="Tutup video">&times;</button>
+            <div id="videoEmbed"></div>
+        </div>
+    </div>
+
+    <nav class="nav-sticky" aria-label="Navigasi gerakan">
+        <button class="nav-btn" id="prevGerakan" type="button">
+            <span aria-hidden="true">‹</span>
+            <span>Sebelumnya</span>
+        </button>
+        <button class="autoplay-toggle" id="autoplayToggle" type="button" aria-pressed="false">
+            <span aria-hidden="true">▶</span>
+            <span class="autoplay-toggle-text">Autoplay</span>
+        </button>
+        <button class="nav-btn" id="nextGerakan" type="button">
+            <span>Berikutnya</span>
+            <span aria-hidden="true">›</span>
+        </button>
+    </nav>
+
+    <script src="../js/navigation.js"></script>
+    <script src="../js/autoplay.js"></script>
+    <script>
+        const MOCK_GERAKAN = {
+            id: 1,
+            nama: "Qiyam",
+            urutan: 1,
+            deskripsi: "Berdiri tegak menghadap kiblat dengan khusyuk sebelum memulai sholat.",
+            gambar_url: "../../assets/images/hero-prayer-placeholder.svg",
+            video_url: null
+        };
+
+        const MOCK_BACAAN = [
+            {
+                id: 1,
+                urutan: 1,
+                teks_arab: "??????? ????????",
+                teks_latin: "Allahu Akbar",
+                terjemahan: "Allah Maha Besar",
+                audio_url: "../../assets/audio/takbir.mp3",
+                sumber: "HPT Muhammadiyah, Kitab Shalat"
+            }
+        ];
+
+        function getCurrentGerakanId() {
+            const params = new URLSearchParams(window.location.search);
+            const id = parseInt(params.get("id"), 10);
+            return !isNaN(id) && id >= 1 && id <= 13 ? id : 1;
+        }
+
+        function getStoredMode() {
+            return sessionStorage.getItem("modeTampilan") || "dewasa";
+        }
+
+        async function fetchGerakan(id, kategori) {
+            try {
+                const response = await fetch(`/backend/api/gerakan.php?id=${id}&kategori=${kategori}`);
+                const payload = await response.json();
+
+                if (!response.ok || payload.status !== "success") {
+                    throw new Error(payload.message || "Gagal memuat gerakan");
+                }
+
+                return payload.data;
+            } catch (error) {
+                console.warn("Fetch gerakan failed, using mock data:", error);
+                return MOCK_GERAKAN;
+            }
+        }
+
+        async function fetchBacaan(gerakanId) {
+            try {
+                const response = await fetch(`/backend/api/bacaan.php?id_gerakan=${gerakanId}`);
+                const payload = await response.json();
+
+                if (!response.ok || payload.status !== "success") {
+                    throw new Error(payload.message || "Gagal memuat bacaan");
+                }
+
+                return Array.isArray(payload.data) ? payload.data : [];
+            } catch (error) {
+                console.warn("Fetch bacaan failed, using mock data:", error);
+                return MOCK_BACAAN;
+            }
+        }
+
+        function renderGerakan(gerakan, mode) {
+            const imageHtml = gerakan.gambar_url
+                ? `<img class="gerakan-image" src="${gerakan.gambar_url}" alt="Gerakan ${gerakan.nama}">`
+                : '<div class="gerakan-image" style="min-height: 320px; display: grid; place-items: center; color: var(--text-muted);">Gambar tidak tersedia</div>';
+
+            const videoHtml = gerakan.video_url
+                ? `<div class="video-section">
+                       <button class="video-btn" id="openVideoBtn" type="button">
+                           <span aria-hidden="true">?</span>
+                           <span>Tonton Video</span>
+                       </button>
+                   </div>`
+                : '';
+
+            return `
+                <div>
+                    <p class="eyebrow">Gerakan ${String(gerakan.urutan).padStart(2, "0")}</p>
+                    <h1>${gerakan.nama}</h1>
+                    ${gerakan.deskripsi ? `<p class="movement-copy">${gerakan.deskripsi}</p>` : ''}
+                </div>
+
+                <div class="gerakan-image-wrapper">
+                    ${imageHtml}
+                </div>
+
+                ${videoHtml}
+            `;
+        }
+
+        function renderBacaan(bacaanList, mode) {
+            if (!bacaanList || bacaanList.length === 0) {
+                return '<p class="movement-copy" style="color: var(--text-muted);">Tidak ada bacaan untuk gerakan ini.</p>';
+            }
+
+            return bacaanList
+                .sort((a, b) => a.urutan - b.urutan)
+                .map((bacaan, index) => {
+                    const showSumber = mode === "dewasa" && bacaan.sumber;
+
+                    const audioHtml = bacaan.audio_url
+                        ? `<div class="audio-player">
+                               <div class="audio-controls">
+                                   <button class="audio-btn" id="playBtn_${index}" type="button" aria-label="Putar audio">?</button>
+                                   <button class="audio-btn" id="replayBtn_${index}" type="button" aria-label="Putar ulang" style="font-size: 16px;">?</button>
+                                   <div class="audio-progress-wrapper">
+                                       <div class="audio-progress" id="progress_${index}">
+                                           <div class="audio-progress-bar" id="progressBar_${index}"></div>
+                                       </div>
+                                       <div class="audio-time">
+                                           <span id="currentTime_${index}">0:00</span>
+                                           <span id="duration_${index}">0:00</span>
+                                       </div>
+                                   </div>
+                               </div>
+                               <audio id="audio_${index}" src="${bacaan.audio_url}" preload="metadata"></audio>
+                           </div>`
+                        : '';
+
+                    return `
+                        <div class="bacaan-section">
+                            ${bacaan.teks_arab ? `<p class="bacaan-arab">${bacaan.teks_arab}</p>` : ''}
+                            ${bacaan.teks_latin ? `<p class="bacaan-latin">${bacaan.teks_latin}</p>` : ''}
+                            ${bacaan.terjemahan ? `<p class="bacaan-terjemahan">${bacaan.terjemahan}</p>` : ''}
+                            ${showSumber ? `<p class="bacaan-sumber">Sumber: ${bacaan.sumber}</p>` : ''}
+                            ${audioHtml}
+                        </div>
+                    `;
+                })
+                .join("");
+        }
+
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "0:00";
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, "0")}`;
+        }
+
+        function setupAudioPlayer(index) {
+            const audio = document.getElementById(`audio_${index}`);
+            const playBtn = document.getElementById(`playBtn_${index}`);
+            const replayBtn = document.getElementById(`replayBtn_${index}`);
+            const progress = document.getElementById(`progress_${index}`);
+            const progressBar = document.getElementById(`progressBar_${index}`);
+            const currentTimeEl = document.getElementById(`currentTime_${index}`);
+            const durationEl = document.getElementById(`duration_${index}`);
+
+            if (!audio || !playBtn) return;
+
+            audio.addEventListener("loadedmetadata", () => {
+                if (durationEl) {
+                    durationEl.textContent = formatTime(audio.duration);
+                }
+            });
+
+            audio.addEventListener("timeupdate", () => {
+                const percent = (audio.currentTime / audio.duration) * 100 || 0;
+                if (progressBar) {
+                    progressBar.style.width = `${percent}%`;
+                }
+                if (currentTimeEl) {
+                    currentTimeEl.textContent = formatTime(audio.currentTime);
+                }
+            });
+
+            audio.addEventListener("ended", () => {
+                playBtn.textContent = "?";
+                playBtn.setAttribute("aria-label", "Putar audio");
+                if (progressBar) {
+                    progressBar.style.width = "0%";
+                }
+            });
+
+            audio.addEventListener("error", () => {
+                const notification = document.getElementById("autoplayNotification");
+                if (notification) {
+                    notification.textContent = "Gagal memuat audio";
+                    notification.classList.add("is-visible");
+                    setTimeout(() => notification.classList.remove("is-visible"), 3000);
+                }
+            });
+
+            playBtn.addEventListener("click", () => {
+                const allAudios = document.querySelectorAll("audio");
+                allAudios.forEach((a, i) => {
+                    if (a !== audio && !a.paused) {
+                        a.pause();
+                        const otherBtn = document.getElementById(`playBtn_${i}`);
+                        if (otherBtn) {
+                            otherBtn.textContent = "?";
+                            otherBtn.setAttribute("aria-label", "Putar audio");
+                        }
+                    }
+                });
+
+                if (audio.paused) {
+                    audio.play();
+                    playBtn.textContent = "??";
+                    playBtn.setAttribute("aria-label", "Jeda audio");
+                } else {
+                    audio.pause();
+                    playBtn.textContent = "?";
+                    playBtn.setAttribute("aria-label", "Putar audio");
+                }
+            });
+
+            if (replayBtn) {
+                replayBtn.addEventListener("click", () => {
+                    audio.currentTime = 0;
+                    audio.play();
+                    playBtn.textContent = "??";
+                    playBtn.setAttribute("aria-label", "Jeda audio");
+                });
+            }
+
+            if (progress) {
+                progress.addEventListener("click", (e) => {
+                    const rect = progress.getBoundingClientRect();
+                    const percent = (e.clientX - rect.left) / rect.width;
+                    audio.currentTime = percent * audio.duration;
+                });
+            }
+
+            if (index === 0) {
+                audio.id = "bacaanAudio";
+            }
+        }
+
+        function setupVideoModal(videoUrl) {
+            const modal = document.getElementById("videoModal");
+            const openBtn = document.getElementById("openVideoBtn");
+            const closeBtn = document.getElementById("videoClose");
+            const embedContainer = document.getElementById("videoEmbed");
+
+            if (!modal || !openBtn || !videoUrl) return;
+
+            openBtn.addEventListener("click", () => {
+                const isYouTube = videoUrl.includes("youtube.com") || videoUrl.includes("youtu.be");
+
+                if (isYouTube) {
+                    let videoId = "";
+                    if (videoUrl.includes("youtu.be/")) {
+                        videoId = videoUrl.split("youtu.be/")[1].split("?")[0];
+                    } else if (videoUrl.includes("watch?v=")) {
+                        videoId = videoUrl.split("watch?v=")[1].split("&")[0];
+                    }
+
+                    embedContainer.innerHTML = `<iframe class="video-embed" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                } else {
+                    embedContainer.innerHTML = `<video class="video-embed" controls src="${videoUrl}"></video>`;
+                }
+
+                modal.classList.add("is-open");
+                document.body.style.overflow = "hidden";
+            });
+
+            const closeModal = () => {
+                modal.classList.remove("is-open");
+                embedContainer.innerHTML = "";
+                document.body.style.overflow = "";
+            };
+
+            if (closeBtn) {
+                closeBtn.addEventListener("click", closeModal);
+            }
+
+            modal.addEventListener("click", (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape" && modal.classList.contains("is-open")) {
+                    closeModal();
+                }
+            });
+        }
+
+        async function loadDetailPage() {
+            const container = document.getElementById("detailContainer");
+            const gerakanId = getCurrentGerakanId();
+            const mode = getStoredMode();
+
+            if (!container) return;
+
+            container.classList.add("is-loading");
+
+            try {
+                const [gerakan, bacaanList] = await Promise.all([
+                    fetchGerakan(gerakanId, mode),
+                    fetchBacaan(gerakanId)
+                ]);
+
+                const gerakanHtml = renderGerakan(gerakan, mode);
+                const bacaanHtml = renderBacaan(bacaanList, mode);
+
+                container.innerHTML = gerakanHtml + bacaanHtml;
+                container.classList.remove("is-loading");
+
+                bacaanList.forEach((_, index) => {
+                    setupAudioPlayer(index);
+                });
+
+                if (gerakan.video_url) {
+                    setupVideoModal(gerakan.video_url);
+                }
+
+                document.title = `${gerakan.nama} | Tuntunan Tata Cara Sholat`;
+            } catch (error) {
+                console.error("Failed to load detail page:", error);
+                container.innerHTML = `
+                    <div class="movement-state">
+                        <div>
+                            <div class="movement-state-icon">!</div>
+                            <strong>Gagal memuat detail gerakan</strong>
+                            <span>Periksa koneksi atau <a href="javascript:location.reload()">muat ulang halaman</a>.</span>
+                        </div>
+                    </div>
+                `;
+                container.classList.remove("is-loading");
+            }
+        }
+
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", loadDetailPage);
+        } else {
+            loadDetailPage();
+        }
+    </script>
+</body>
+</html>
