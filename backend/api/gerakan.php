@@ -12,7 +12,15 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 
 require_once __DIR__ . '/../controllers/GerakanController.php';
 
-if (isset($_GET['id'])) {
+if (isset($_GET['next'])) {
+    GerakanController::next();
+} elseif (isset($_GET['prev'])) {
+    GerakanController::prev();
+} elseif (isset($_GET['total'])) {
+    GerakanController::total();
+} elseif (isset($_GET['autoplay'])) {
+    GerakanController::autoplay();
+} elseif (isset($_GET['id'])) {
     GerakanController::show();
 } else {
     GerakanController::index();
