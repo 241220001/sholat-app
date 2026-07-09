@@ -1,0 +1,375 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+		"name": "Sholat App API",
+		"description": "Complete API collection for Tuntunan Tata Cara Sholat backend\n\nBase URL: http://localhost/sholat-app/backend/api\n\nAll endpoints use GET method and return JSON responses.\n\nFor production, update base URL in environment variables.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health & Info",
+			"item": [
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/health.php",
+							"host": ["{{base_url}}"],
+							"path": ["health.php"]
+						},
+						"description": "Verify database connection status"
+					},
+					"response": []
+				},
+				{
+					"name": "Kelompok Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/kelompok.php",
+							"host": ["{{base_url}}"],
+							"path": ["kelompok.php"]
+						},
+						"description": "Get group identity information for header display"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Gerakan",
+			"item": [
+				{
+					"name": "List Gerakan (Dewasa)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/gerakan.php?kategori=dewasa",
+							"host": ["{{base_url}}"],
+							"path": ["gerakan.php"],
+							"query": [
+								{
+									"key": "kategori",
+									"value": "dewasa",
+									"description": "Category: dewasa or anak"
+								}
+							]
+						},
+						"description": "Get all 13 movements for adult mode"
+					},
+					"response": []
+				},
+				{
+					"name": "List Gerakan (Anak)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/gerakan.php?kategori=anak",
+							"host": ["{{base_url}}"],
+							"path": ["gerakan.php"],
+							"query": [
+								{
+									"key": "kategori",
+									"value": "anak",
+									"description": "Category: dewasa or anak"
+								}
+							]
+						},
+						"description": "Get all 13 movements for kids mode"
+					},
+					"response": []
+				},
+				{
+					"name": "Detail Gerakan",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/gerakan.php?id=1",
+							"host": ["{{base_url}}"],
+							"path": ["gerakan.php"],
+							"query": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "Movement ID (1-26)"
+								}
+							]
+						},
+						"description": "Get detailed information for a single movement"
+					},
+					"response": []
+				},
+				{
+					"name": "Next Gerakan",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/gerakan.php?next&id_kategori=1&urutan=1",
+							"host": ["{{base_url}}"],
+							"path": ["gerakan.php"],
+							"query": [
+								{
+									"key": "next",
+									"value": null,
+									"description": "Flag for next movement"
+								},
+								{
+									"key": "id_kategori",
+									"value": "1",
+									"description": "Category ID (1=dewasa, 2=anak)"
+								},
+								{
+									"key": "urutan",
+									"value": "1",
+									"description": "Current sequence number (1-13)"
+								}
+							]
+						},
+						"description": "Get the next movement in sequence"
+					},
+					"response": []
+				},
+				{
+					"name": "Previous Gerakan",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/gerakan.php?prev&id_kategori=1&urutan=2",
+							"host": ["{{base_url}}"],
+							"path": ["gerakan.php"],
+							"query": [
+								{
+									"key": "prev",
+									"value": null,
+									"description": "Flag for previous movement"
+								},
+								{
+									"key": "id_kategori",
+									"value": "1",
+									"description": "Category ID (1=dewasa, 2=anak)"
+								},
+								{
+									"key": "urutan",
+									"value": "2",
+									"description": "Current sequence number (1-13)"
+								}
+							]
+						},
+						"description": "Get the previous movement in sequence"
+					},
+					"response": []
+				},
+				{
+					"name": "Total Gerakan",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/gerakan.php?total&kategori=dewasa",
+							"host": ["{{base_url}}"],
+							"path": ["gerakan.php"],
+							"query": [
+								{
+									"key": "total",
+									"value": null,
+									"description": "Flag for count"
+								},
+								{
+									"key": "kategori",
+									"value": "dewasa",
+									"description": "Category: dewasa or anak"
+								}
+							]
+						},
+						"description": "Get total count of movements (always 13)"
+					},
+					"response": []
+				},
+				{
+					"name": "Autoplay Data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/gerakan.php?autoplay&kategori=dewasa",
+							"host": ["{{base_url}}"],
+							"path": ["gerakan.php"],
+							"query": [
+								{
+									"key": "autoplay",
+									"value": null,
+									"description": "Flag for autoplay data"
+								},
+								{
+									"key": "kategori",
+									"value": "dewasa",
+									"description": "Category: dewasa or anak"
+								}
+							]
+						},
+						"description": "Get all movements with nested bacaan arrays for autoplay feature"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bacaan",
+			"item": [
+				{
+					"name": "Bacaan by Gerakan",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/bacaan.php?id_gerakan=2",
+							"host": ["{{base_url}}"],
+							"path": ["bacaan.php"],
+							"query": [
+								{
+									"key": "id_gerakan",
+									"value": "2",
+									"description": "Movement ID (1-26)"
+								}
+							]
+						},
+						"description": "Get all readings for a specific movement"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Error Tests",
+			"item": [
+				{
+					"name": "Error: Missing kategori",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/gerakan.php",
+							"host": ["{{base_url}}"],
+							"path": ["gerakan.php"]
+						},
+						"description": "Test error handling for missing kategori parameter"
+					},
+					"response": []
+				},
+				{
+					"name": "Error: Invalid kategori",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/gerakan.php?kategori=invalid",
+							"host": ["{{base_url}}"],
+							"path": ["gerakan.php"],
+							"query": [
+								{
+									"key": "kategori",
+									"value": "invalid"
+								}
+							]
+						},
+						"description": "Test error handling for invalid kategori value"
+					},
+					"response": []
+				},
+				{
+					"name": "Error: Invalid ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/gerakan.php?id=abc",
+							"host": ["{{base_url}}"],
+							"path": ["gerakan.php"],
+							"query": [
+								{
+									"key": "id",
+									"value": "abc"
+								}
+							]
+						},
+						"description": "Test error handling for non-numeric ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Error: No next gerakan",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/gerakan.php?next&id_kategori=1&urutan=13",
+							"host": ["{{base_url}}"],
+							"path": ["gerakan.php"],
+							"query": [
+								{
+									"key": "next",
+									"value": null
+								},
+								{
+									"key": "id_kategori",
+									"value": "1"
+								},
+								{
+									"key": "urutan",
+									"value": "13",
+									"description": "Last movement - no next available"
+								}
+							]
+						},
+						"description": "Test error when trying to get next from last movement"
+					},
+					"response": []
+				},
+				{
+					"name": "Error: No prev gerakan",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/gerakan.php?prev&id_kategori=1&urutan=1",
+							"host": ["{{base_url}}"],
+							"path": ["gerakan.php"],
+							"query": [
+								{
+									"key": "prev",
+									"value": null
+								},
+								{
+									"key": "id_kategori",
+									"value": "1"
+								},
+								{
+									"key": "urutan",
+									"value": "1",
+									"description": "First movement - no previous available"
+								}
+							]
+						},
+						"description": "Test error when trying to get previous from first movement"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost/sholat-app/backend/api",
+			"type": "default"
+		}
+	]
+}
