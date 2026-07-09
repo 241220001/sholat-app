@@ -4,6 +4,8 @@ require_once __DIR__ . '/../core/Response.php';
 
 class BacaanController {
     public static function index() {
+        die('TES-CONTROLLER-BACAAN');
+        
         $idGerakan = $_GET['id_gerakan'] ?? null;
         
         if (!$idGerakan || !is_numeric($idGerakan)) {
