@@ -1,1 +1,6 @@
-Require all granted
+# Deny direct access to all files in backend root
+Order Deny,Allow
+Deny from all
+
+# Allow access only to api/ subdirectory
+# (handled by api/.htaccess)
