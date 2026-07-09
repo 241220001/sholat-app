@@ -60,7 +60,7 @@ function setMode(mode) {
 
 async function loadGroupIdentity() {
     try {
-        const response = await fetch("/api/kelompok");
+        const response = await fetch("/backend/api/kelompok.php");
         const payload = await response.json();
 
         if (payload.status !== "success" || !payload.data) {
@@ -139,7 +139,7 @@ function renderMovements(items) {
 
 async function fetchMovements(mode) {
     try {
-        const response = await fetch(`/api/gerakan?kategori=${encodeURIComponent(mode)}`);
+        const response = await fetch(`/backend/api/gerakan.php?kategori=${encodeURIComponent(mode)}`);
         const payload = await response.json();
 
         if (!response.ok || payload.status !== "success" || !Array.isArray(payload.data)) {
