@@ -19,10 +19,10 @@ INSERT INTO kategori (nama) VALUES
 -- 2) KELOMPOK (identitas header — PLACEHOLDER, lengkapi dulu)
 -- ------------------------------------------------------------
 INSERT INTO kelompok (nama_kelompok, prodi, mata_kuliah, dosen) VALUES
-('Kelompok [ISI NOMOR/NAMA KELOMPOK]',
- 'Manajemen Bisnis Syariah',
- 'AIK 4',
- 'Dedy Susanto, S.Pd.I., M.M.');
+('Kelompok 1',
+    'Teknik Informatika',
+    'AIK 4',
+    'Dedy Susanto, S.Pd.I., M.M.');
 
 -- ------------------------------------------------------------
 -- 3) GERAKAN — Mode Dewasa (id_kategori = 1)
@@ -89,6 +89,17 @@ INSERT INTO bacaan (id_gerakan, urutan, teks_arab, teks_latin, terjemahan, audio
 -- untuk 11 baris bacaan lain mengikuti pola yang sama (lihat §15).
 -- ------------------------------------------------------------
 INSERT INTO bacaan (id_gerakan, urutan, teks_arab, teks_latin, terjemahan, audio_url, sumber) VALUES
-((SELECT id FROM gerakan WHERE id_kategori=2 AND urutan=2), 1, '[TEKS ARAB TAKBIR]', 'Allāhu Akbar', '[TERJEMAHAN RINGKAS ANAK]', '/assets/audio/bacaan/anak/02-takbir.mp3', 'HPT Muhammadiyah, Kitab Shalat');
+((SELECT id FROM gerakan WHERE id_kategori=2 AND urutan=2),  1, '[TEKS ARAB TAKBIR]', 'Allāhu Akbar', '[TERJEMAHAN RINGKAS ANAK]', '/assets/audio/bacaan/anak/02-takbir.mp3', 'HPT Muhammadiyah, Kitab Shalat'),
+((SELECT id FROM gerakan WHERE id_kategori=2 AND urutan=3),  1, '[TEKS ARAB IFTITAH]',     '[LATIN IFTITAH]',                   '[TERJEMAHAN RINGKAS ANAK]', '/assets/audio/bacaan/anak/03-iftitah.mp3',        'HPT Muhammadiyah, Kitab Shalat'),
+((SELECT id FROM gerakan WHERE id_kategori=2 AND urutan=4),  1, '[TEKS ARAB FATIHAH]',     '[LATIN FATIHAH]',                   '[TERJEMAHAN RINGKAS ANAK]', '/assets/audio/bacaan/anak/04-fatihah.mp3',        'HPT Muhammadiyah, Kitab Shalat'),
+((SELECT id FROM gerakan WHERE id_kategori=2 AND urutan=5),  1, '[TEKS ARAB RUKUK]',       '[LATIN TASBIH RUKUK]',              '[TERJEMAHAN RINGKAS ANAK]', '/assets/audio/bacaan/anak/05-rukuk.mp3',          'HPT Muhammadiyah, Kitab Shalat'),
+((SELECT id FROM gerakan WHERE id_kategori=2 AND urutan=6),  1, '[TEKS ARAB ITIDAL]',      '[LATIN ITIDAL]',                    '[TERJEMAHAN RINGKAS ANAK]', '/assets/audio/bacaan/anak/06-itidal.mp3',         'HPT Muhammadiyah, Kitab Shalat'),
+((SELECT id FROM gerakan WHERE id_kategori=2 AND urutan=7),  1, '[TEKS ARAB TASBIH SUJUD]','[LATIN TASBIH SUJUD]',              '[TERJEMAHAN RINGKAS ANAK]', '/assets/audio/bacaan/anak/07-sujud1.mp3',         'HPT Muhammadiyah, Kitab Shalat'),
+((SELECT id FROM gerakan WHERE id_kategori=2 AND urutan=8),  1, '[TEKS ARAB DUDUK]',       '[LATIN DOA DUDUK ANTARA DUA SUJUD]','[TERJEMAHAN RINGKAS ANAK]', '/assets/audio/bacaan/anak/08-duduk.mp3',          'HPT Muhammadiyah, Kitab Shalat'),
+((SELECT id FROM gerakan WHERE id_kategori=2 AND urutan=9),  1, '[TEKS ARAB TASBIH SUJUD]','[LATIN TASBIH SUJUD]',              '[TERJEMAHAN RINGKAS ANAK]', '/assets/audio/bacaan/anak/09-sujud2.mp3',         'HPT Muhammadiyah, Kitab Shalat'),
+((SELECT id FROM gerakan WHERE id_kategori=2 AND urutan=11), 1, '[TEKS ARAB TASYAHUD AWAL]','[LATIN TASYAHUD AWAL]',            '[TERJEMAHAN RINGKAS ANAK]', '/assets/audio/bacaan/anak/11-tasyahud-awal.mp3',  'HPT Muhammadiyah, Kitab Shalat'),
+((SELECT id FROM gerakan WHERE id_kategori=2 AND urutan=12), 1, '[TEKS ARAB TASYAHUD AKHIR]','[LATIN TASYAHUD AKHIR]',          '[TERJEMAHAN RINGKAS ANAK]', '/assets/audio/bacaan/anak/12-tasyahud-akhir-1.mp3','HPT Muhammadiyah, Kitab Shalat'),
+((SELECT id FROM gerakan WHERE id_kategori=2 AND urutan=12), 2, '[TEKS ARAB SHALAWAT]',    '[LATIN SHALAWAT]',                  '[TERJEMAHAN RINGKAS ANAK]', '/assets/audio/bacaan/anak/12-tasyahud-akhir-2.mp3','HPT Muhammadiyah, Kitab Shalat'),
+((SELECT id FROM gerakan WHERE id_kategori=2 AND urutan=13), 1, '[TEKS ARAB SALAM]',       'Assalāmu''alaikum wa raḥmatullāh',  '[TERJEMAHAN RINGKAS ANAK]', '/assets/audio/bacaan/anak/13-salam.mp3',          'HPT Muhammadiyah, Kitab Shalat');
 -- TODO: lengkapi baris bacaan mode anak untuk urutan 3,4,5,6,7,8,9,11,12(x2),13
 -- mengikuti pola yang sama seperti blok mode dewasa di atas.
