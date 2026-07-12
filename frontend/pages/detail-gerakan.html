@@ -534,7 +534,7 @@
 
         async function fetchGerakan(id, kategori) {
             try {
-                const response = await fetch(`/backend/api/gerakan.php?id=${id}&kategori=${kategori}`);
+                const response = await fetch(`../../backend/api/gerakan.php?id=${id}&kategori=${kategori}`);
                 const payload = await response.json();
 
                 if (!response.ok || payload.status !== "success") {
@@ -550,7 +550,7 @@
 
         async function fetchBacaan(gerakanId) {
             try {
-                const response = await fetch(`/backend/api/bacaan.php?id_gerakan=${gerakanId}`);
+                const response = await fetch(`../../backend/api/bacaan.php?id_gerakan=${gerakanId}`);
                 const payload = await response.json();
 
                 if (!response.ok || payload.status !== "success") {
