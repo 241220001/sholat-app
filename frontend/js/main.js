@@ -12,7 +12,7 @@ const groupFields = {
 // MOCK DATA - ganti ke fetch() asli setelah backend/api/gerakan.php selesai
 const mockGerakan = [
 { id: 1, nama: "Qiyam", urutan: 1, deskripsi: "Berdiri tegak menghadap kiblat sebelum memulai sholat.", gambar_url: "/assets/img/Qiyam (Dewasa).jpeg", video_url: null },
-    { id: 2, nama: "Takbiratul Ihram", urutan: 2, deskripsi: "Mengangkat kedua tangan dan membaca takbir pembuka sholat.", gambar_url: "/assets/img/Takbiratul ihram (Dewasa).jpeg", video_url: null },
+    { id: 2, nama: "Takbiratul Ihram", urutan: 2, deskripsi: "Mengangkat kedua tangan dan membaca takbir pembuka sholat.", gambar_url: "/assets/img/Takbiratul Ihram (Dewasa).jpeg", video_url: null },
     { id: 3, nama: "Bersedekap", urutan: 3, deskripsi: "Meletakkan tangan kanan di atas tangan kiri saat berdiri.", gambar_url: "/assets/img/Qiyam (Dewasa).jpeg", video_url: null },
     { id: 4, nama: "Berdiri Baca Al-Fatihah", urutan: 4, deskripsi: "Membaca Al-Fatihah dan bacaan sholat saat berdiri.", gambar_url: "/assets/img/Qiyam (Dewasa).jpeg", video_url: null },
     { id: 5, nama: "Rukuk", urutan: 5, deskripsi: "Membungkukkan badan dengan punggung rata dan tumakninah.", gambar_url: "/assets/img/Ruku' (Dewasa).jpeg", video_url: null },
@@ -60,7 +60,7 @@ function setMode(mode) {
 
 async function loadGroupIdentity() {
     try {
-        const response = await fetch("/backend/api/kelompok.php");
+        const response = await fetch("../../backend/api/kelompok.php");
         const payload = await response.json();
 
         if (payload.status !== "success" || !payload.data) {
@@ -139,7 +139,7 @@ function renderMovements(items) {
 
 async function fetchMovements(mode) {
     try {
-        const response = await fetch(`/backend/api/gerakan.php?kategori=${encodeURIComponent(mode)}`);
+        const response = await fetch(`../../backend/api/gerakan.php?kategori=${encodeURIComponent(mode)}`);
         const payload = await response.json();
 
         if (!response.ok || payload.status !== "success" || !Array.isArray(payload.data)) {

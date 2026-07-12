@@ -32,7 +32,7 @@
             max-width: 640px;
             margin: 0 auto;
             overflow: hidden;
-            background: linear-gradient(180deg, #FFFFFF 0%, #F8F5EC 100%);
+            background: #FFFFFF;
             border: 1px solid var(--border);
             border-radius: 16px;
             box-shadow: var(--shadow);
@@ -42,8 +42,9 @@
             display: block;
             width: 100%;
             height: auto;
-            min-height: 320px;
-            object-fit: cover;
+            min-height: 240px;
+            max-height: 480px;
+            object-fit: contain;
         }
 
         .bacaan-section {
@@ -403,12 +404,110 @@
     <script src="../js/autoplay.js"></script>
     <script>
         const MOCK_GERAKAN = {
-            id: 1,
-            nama: "Qiyam",
-            urutan: 1,
-            deskripsi: "Berdiri tegak menghadap kiblat dengan khusyuk sebelum memulai sholat.",
-            gambar_url: "../../assets/images/hero-prayer-placeholder.svg",
-            video_url: null
+            1: {
+                id: 1,
+                nama: "Qiyam",
+                urutan: 1,
+                deskripsi: "Berdiri tegak menghadap kiblat dengan khusyuk sebelum memulai sholat.",
+                gambar_url: "/assets/img/Qiyam (Dewasa).jpeg",
+                video_url: null
+            },
+            2: {
+                id: 2,
+                nama: "Takbiratul ihram",
+                urutan: 2,
+                deskripsi: "Mengangkat kedua tangan dan membaca takbir pembuka sholat.",
+                gambar_url: "/assets/img/Takbiratul ihram (Dewasa).jpeg",
+                video_url: null
+            },
+            3: {
+                id: 3,
+                nama: "Bersedekap",
+                urutan: 3,
+                deskripsi: "Meletakkan tangan kanan di atas tangan kiri saat berdiri.",
+                gambar_url: "/assets/img/Qiyam (Dewasa).jpeg",
+                video_url: null
+            },
+            4: {
+                id: 4,
+                nama: "Berdiri Baca Al-Fatihah",
+                urutan: 4,
+                deskripsi: "Membaca Al-Fatihah dan bacaan sholat saat berdiri.",
+                gambar_url: "/assets/img/Qiyam (Dewasa).jpeg",
+                video_url: null
+            },
+            5: {
+                id: 5,
+                nama: "Rukuk",
+                urutan: 5,
+                deskripsi: "Membungkukkan badan dengan punggung rata dan tumakninah.",
+                gambar_url: "/assets/img/Ruku' (Dewasa).jpeg",
+                video_url: null
+            },
+            6: {
+                id: 6,
+                nama: "I'tidal",
+                urutan: 6,
+                deskripsi: "Bangkit dari rukuk hingga berdiri tegak kembali.",
+                gambar_url: "/assets/img/I'tidal (Dewasa).jpeg",
+                video_url: null
+            },
+            7: {
+                id: 7,
+                nama: "Sujud Pertama",
+                urutan: 7,
+                deskripsi: "Sujud pertama dengan tujuh anggota sujud menempel tempat sujud.",
+                gambar_url: "/assets/img/Sujud (Dewasa).jpeg",
+                video_url: null
+            },
+            8: {
+                id: 8,
+                nama: "Duduk Antara Dua Sujud",
+                urutan: 8,
+                deskripsi: "Duduk iftirasy sejenak di antara dua sujud.",
+                gambar_url: "/assets/img/Tahiyat (Dewasa).jpeg",
+                video_url: null
+            },
+            9: {
+                id: 9,
+                nama: "Sujud Kedua",
+                urutan: 9,
+                deskripsi: "Sujud kedua dengan tumakninah sebelum bangkit.",
+                gambar_url: "/assets/img/Sujud (Dewasa).jpeg",
+                video_url: null
+            },
+            10: {
+                id: 10,
+                nama: "Berdiri Rakaat Berikutnya",
+                urutan: 10,
+                deskripsi: "Bangkit berdiri untuk melanjutkan rakaat berikutnya.",
+                gambar_url: "/assets/img/Qiyam (Dewasa).jpeg",
+                video_url: null
+            },
+            11: {
+                id: 11,
+                nama: "Tasyahud Awal",
+                urutan: 11,
+                deskripsi: "Duduk membaca tasyahud awal pada rakaat kedua.",
+                gambar_url: "/assets/img/Tahiyat (Dewasa).jpeg",
+                video_url: null
+            },
+            12: {
+                id: 12,
+                nama: "Tasyahud Akhir",
+                urutan: 12,
+                deskripsi: "Duduk akhir sebelum menutup sholat dengan salam.",
+                gambar_url: "/assets/img/Tahiyat (Dewasa).jpeg",
+                video_url: null
+            },
+            13: {
+                id: 13,
+                nama: "Salam",
+                urutan: 13,
+                deskripsi: "Menoleh ke kanan dan kiri untuk mengakhiri sholat.",
+                gambar_url: "/assets/img/Salam kiri (Dewasa).jpeg",
+                video_url: null
+            }
         };
 
         const MOCK_BACAAN = [
@@ -418,7 +517,7 @@
                 teks_arab: "??????? ????????",
                 teks_latin: "Allahu Akbar",
                 terjemahan: "Allah Maha Besar",
-                audio_url: "../../assets/audio/takbir.mp3",
+                audio_url: "null",
                 sumber: "HPT Muhammadiyah, Kitab Shalat"
             }
         ];
@@ -435,7 +534,7 @@
 
         async function fetchGerakan(id, kategori) {
             try {
-                const response = await fetch(`/backend/api/gerakan.php?id=${id}&kategori=${kategori}`);
+                const response = await fetch(`../../backend/api/gerakan.php?id=${id}&kategori=${kategori}`);
                 const payload = await response.json();
 
                 if (!response.ok || payload.status !== "success") {
@@ -445,13 +544,13 @@
                 return payload.data;
             } catch (error) {
                 console.warn("Fetch gerakan failed, using mock data:", error);
-                return MOCK_GERAKAN;
+                return MOCK_GERAKAN[id] || MOCK_GERAKAN[1];
             }
         }
 
         async function fetchBacaan(gerakanId) {
             try {
-                const response = await fetch(`/backend/api/bacaan.php?id_gerakan=${gerakanId}`);
+                const response = await fetch(`../../backend/api/bacaan.php?id_gerakan=${gerakanId}`);
                 const payload = await response.json();
 
                 if (!response.ok || payload.status !== "success") {

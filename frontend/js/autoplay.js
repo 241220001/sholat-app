@@ -7,19 +7,10 @@
  * - Stop automatically at gerakan 13
  * - Visual indicator when autoplay is active
  */
+// TOTAL_GERAKAN, getCurrentGerakanId(), getStoredMode() dipakai dari navigation.js
+// navigation.js WAJIB di-load SEBELUM autoplay.js di HTML
 
-const TOTAL_GERAKAN = 13;
 const AUTOPLAY_STORAGE_KEY = "autoplayEnabled";
-
-function getCurrentGerakanId() {
-    const params = new URLSearchParams(window.location.search);
-    const id = parseInt(params.get("id"), 10);
-    return !isNaN(id) && id >= 1 && id <= TOTAL_GERAKAN ? id : 1;
-}
-
-function getStoredMode() {
-    return sessionStorage.getItem("modeTampilan") || localStorage.getItem("modeTampilan") || "dewasa";
-}
 
 function isAutoplayEnabled() {
     return sessionStorage.getItem(AUTOPLAY_STORAGE_KEY) === "true";
