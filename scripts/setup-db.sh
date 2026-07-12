@@ -20,8 +20,9 @@ MYSQL_USER="${1:-root}"
 MYSQL_PASS="${2:-}"
 DB_NAME="tuntunan_sholat"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SCHEMA_FILE="$SCRIPT_DIR/database/schema.sql"
-SEED_FILE="$SCRIPT_DIR/database/seed.sql"
+ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+SCHEMA_FILE="$ROOT_DIR/database/schema.sql"
+SEED_FILE="$ROOT_DIR/database/seed.sql"
 
 # Print header
 echo -e "${BLUE}=========================================="
@@ -119,7 +120,7 @@ fi
 
 # Update .env file if it exists
 echo -e "\n${YELLOW}Checking .env configuration...${NC}"
-ENV_FILE="$SCRIPT_DIR/.env"
+ENV_FILE="$ROOT_DIR/.env"
 
 if [ -f "$ENV_FILE" ]; then
     # Check if DB_NAME matches
@@ -133,8 +134,8 @@ else
     echo -e "${YELLOW}⚠ .env file not found${NC}"
     echo "  Creating from .env.example..."
     
-    if [ -f "$SCRIPT_DIR/.env.example" ]; then
-        cp "$SCRIPT_DIR/.env.example" "$ENV_FILE"
+    if [ -f "$ROOT_DIR/.env.example" ]; then
+        cp "$ROOT_DIR/.env.example" "$ENV_FILE"
         
         # Update DB_NAME in .env
         if [[ "$OSTYPE" == "darwin"* ]]; then
