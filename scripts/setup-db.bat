@@ -12,8 +12,9 @@ set MYSQL_USER=%1
 set MYSQL_PASS=%2
 set DB_NAME=tuntunan_sholat
 set SCRIPT_DIR=%~dp0
-set SCHEMA_FILE=%SCRIPT_DIR%database\schema.sql
-set SEED_FILE=%SCRIPT_DIR%database\seed.sql
+set ROOT_DIR=%SCRIPT_DIR%..\
+set SCHEMA_FILE=%ROOT_DIR%database\schema.sql
+set SEED_FILE=%ROOT_DIR%database\seed.sql
 
 if "%MYSQL_USER%"=="" set MYSQL_USER=root
 if "%MYSQL_PASS%"=="" set MYSQL_PASS=
@@ -119,7 +120,7 @@ if "%GERAKAN_COUNT%"=="13" (
 REM Check .env file
 echo.
 echo Checking .env configuration...
-set ENV_FILE=%SCRIPT_DIR%.env
+set ENV_FILE=%ROOT_DIR%.env
 
 if exist "%ENV_FILE%" (
     findstr /C:"DB_NAME=%DB_NAME%" "%ENV_FILE%" >nul
@@ -131,9 +132,9 @@ if exist "%ENV_FILE%" (
     )
 ) else (
     echo [WARN] .env file not found
-    if exist "%SCRIPT_DIR%.env.example" (
+    if exist "%ROOT_DIR%.env.example" (
         echo   Creating from .env.example...
-        copy "%SCRIPT_DIR%.env.example" "%ENV_FILE%" >nul
+        copy "%ROOT_DIR%.env.example" "%ENV_FILE%" >nul
         echo [PASS] .env file created
         echo   Please review and update DB_USER and DB_PASS if needed
     ) else (
