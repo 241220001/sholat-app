@@ -391,7 +391,7 @@
             <span>Sebelumnya</span>
         </button>
         <button class="autoplay-toggle" id="autoplayToggle" type="button" aria-pressed="false">
-            <span aria-hidden="true"><span aria-hidden="true">▶</span>
+            <span aria-hidden="true">▶</span>
             <span class="autoplay-toggle-text">Autoplay</span>
         </button>
         <button class="nav-btn" id="nextGerakan" type="button">
@@ -510,21 +510,17 @@
             }
         };
 
-        const MOCK_BACAAN_BY_ID = {
-            1: [{ id: 1, urutan: 1, teks_arab: "\u0627\u0644\u0644\u0647 \u0623\u0643\u0628\u0631", teks_latin: "Allahu Akbar", terjemahan: "Allah Maha Besar", audio_url: null, sumber: "HPT Muhammadiyah, Kitab Shalat" }],
-            2: [{ id: 2, urutan: 1, teks_arab: "\u0627\u0644\u0644\u0647 \u0623\u0643\u0628\u0631", teks_latin: "Allahu Akbar", terjemahan: "Allah Maha Besar", audio_url: "../../assets/audio/takbiratul-ihram.mp3", sumber: "HPT Muhammadiyah, Kitab Shalat" }],
-            3: [{ id: 3, urutan: 1, teks_arab: "\u0627\u0644\u0644\u0647\u0645 \u0628\u0627\u0639\u062f \u0628\u064a\u0646\u064a \u0648\u0628\u064a\u0646 \u062e\u0637\u0627\u064a\u0627\u064a", teks_latin: "Allahumma baaid baynii wa bayna khotoyaaya", terjemahan: "Ya Allah jauhkanlah aku dari dosa-dosaku", audio_url: "../../assets/audio/iftitah.mp3", sumber: "HPT Muhammadiyah, Kitab Shalat" }],
-            4: [{ id: 4, urutan: 1, teks_arab: "\u0628\u0650\u0633\u0652\u0645\u0650 \u0671\u0644\u0644\u064e\u0651\u0647\u0650 \u0671\u0644\u0631\u064e\u0651\u062d\u0652\u0645\u064e\u0670\u0646\u0650 \u0671\u0644\u0631\u064e\u0651\u062d\u0650\u064a\u0645\u0650", teks_latin: "Bismillahirrahmanirrahim", terjemahan: "Dengan nama Allah Yang Maha Pengasih lagi Maha Penyayang", audio_url: "../../assets/audio/alfatihah.mp3", sumber: "HPT Muhammadiyah, Kitab Shalat" }],
-            5: [{ id: 5, urutan: 1, teks_arab: "\u0633\u064f\u0628\u0652\u062d\u064e\u0627\u0646\u064e\u0643\u064e \u0671\u0644\u0644\u064e\u0651\u0647\u064f\u0645\u064e\u0651 \u0631\u064e\u0628\u064e\u0651\u0646\u064e\u0627 \u0648\u064e\u0628\u0650\u062d\u064e\u0645\u0652\u062f\u0650\u0643\u064e", teks_latin: "Subhaanakallah humma rabbanaa wa bihamdik", terjemahan: "Maha Suci Engkau ya Allah, dengan memuji-Mu", audio_url: "../../assets/audio/rukuk.mp3", sumber: "HPT Muhammadiyah, Kitab Shalat" }],
-            6: [{ id: 6, urutan: 1, teks_arab: "\u0633\u064e\u0645\u0650\u0639\u064e \u0671\u0644\u0644\u064e\u0651\u0647\u064f \u0644\u0650\u0645\u064e\u0646\u0652 \u062d\u064e\u0645\u0650\u062f\u064e\u0647\u064f", teks_latin: "Samiallaahu liman hamidah", terjemahan: "Allah mendengar orang yang memuji-Nya", audio_url: "../../assets/audio/itidal.mp3", sumber: "HPT Muhammadiyah, Kitab Shalat" }],
-            7: [{ id: 7, urutan: 1, teks_arab: "\u0633\u064f\u0628\u0652\u062d\u064e\u0627\u0646\u064e\u0643\u064e \u0671\u0644\u0644\u064e\u0651\u0647\u064f\u0645\u064e\u0651 \u0631\u064e\u0628\u064e\u0651\u0646\u064e\u0627", teks_latin: "Subhaanakallah humma rabbanaa", terjemahan: "Maha Suci Engkau ya Allah Tuhan kami", audio_url: "../../assets/audio/sujud1.mp3", sumber: "HPT Muhammadiyah, Kitab Shalat" }],
-            8: [{ id: 8, urutan: 1, teks_arab: "\u0671\u0644\u0644\u064e\u0651\u0647\u064f\u0645\u064e\u0651 \u0671\u063a\u0652\u0641\u0650\u0631\u0652 \u0644\u0650\u064a \u0648\u064e\u0671\u0631\u0652\u062d\u064e\u0645\u0652\u0646\u0650\u064a", teks_latin: "Allahummaghfirlii warhamnii", terjemahan: "Ya Allah ampunilah aku dan rahmatilah aku", audio_url: "../../assets/audio/duduk-diantara-sujud.mp3", sumber: "HPT Muhammadiyah, Kitab Shalat" }],
-            9: [{ id: 9, urutan: 1, teks_arab: "\u0633\u064f\u0628\u0652\u062d\u064e\u0627\u0646\u064e\u0643\u064e \u0671\u0644\u0644\u064e\u0651\u0647\u064f\u0645\u064e\u0651 \u0631\u064e\u0628\u064e\u0651\u0646\u064e\u0627", teks_latin: "Subhaanakallah humma rabbanaa", terjemahan: "Maha Suci Engkau ya Allah Tuhan kami", audio_url: "../../assets/audio/sujud2.mp3", sumber: "HPT Muhammadiyah, Kitab Shalat" }],
-            10: [{ id: 10, urutan: 1, teks_arab: "\u0633\u064f\u0628\u0652\u062d\u064e\u0627\u0646\u064e\u0643\u064e \u0671\u0644\u0644\u064e\u0651\u0647\u064f\u0645\u064e\u0651", teks_latin: "Subhaanakallah humma", terjemahan: "Maha Suci Engkau ya Allah", audio_url: null, sumber: "HPT Muhammadiyah, Kitab Shalat" }],
-            11: [{ id: 11, urutan: 1, teks_arab: "\u0671\u0644\u062a\u064e\u0651\u062d\u0650\u064a\u064e\u0651\u0627\u062a\u064f \u0644\u0650\u0644\u064e\u0651\u0647\u0650", teks_latin: "Attahiyyaatu lillaahi", terjemahan: "Segala kehormatan bagi Allah", audio_url: "../../assets/audio/tasyahud-akhir.mp3", sumber: "HPT Muhammadiyah, Kitab Shalat" }],
-            12: [{ id: 12, urutan: 1, teks_arab: "\u0671\u0644\u062a\u064e\u0651\u062d\u0650\u064a\u064e\u0651\u0627\u062a\u064f \u0644\u0650\u0644\u064e\u0651\u0647\u0650", teks_latin: "Attahiyyaatu lillaahi", terjemahan: "Segala kehormatan bagi Allah", audio_url: "../../assets/audio/tasyahud-akhir.mp3", sumber: "HPT Muhammadiyah, Kitab Shalat" }],
-            13: [{ id: 13, urutan: 1, teks_arab: "\u0671\u0644\u0633\u064e\u0651\u0644\u064e\u0627\u0645\u064f \u0639\u064e\u0644\u064e\u064a\u0652\u0643\u064f\u0645\u0652", teks_latin: "Assalamu alaikum", terjemahan: "Semoga keselamatan atas kalian", audio_url: "../../assets/audio/salam.mp3", sumber: "HPT Muhammadiyah, Kitab Shalat" }]
-        };
+        const MOCK_BACAAN = [
+            {
+                id: 1,
+                urutan: 1,
+                teks_arab: "??????? ????????",
+                teks_latin: "Allahu Akbar",
+                terjemahan: "Allah Maha Besar",
+                audio_url: null,
+                sumber: "HPT Muhammadiyah, Kitab Shalat"
+            }
+        ];
 
         function getCurrentGerakanId() {
             const params = new URLSearchParams(window.location.search);
@@ -564,7 +560,7 @@
                 return Array.isArray(payload.data) ? payload.data : [];
             } catch (error) {
                 console.warn("Fetch bacaan failed, using mock data:", error);
-                return MOCK_BACAAN_BY_ID[gerakanId] || [];
+                return MOCK_BACAAN;
             }
         }
 
@@ -576,7 +572,7 @@
             const videoHtml = gerakan.video_url
                 ? `<div class="video-section">
                        <button class="video-btn" id="openVideoBtn" type="button">
-                           <span aria-hidden="true">▶</span>
+                           <span aria-hidden="true">?</span>
                            <span>Tonton Video</span>
                        </button>
                    </div>`
@@ -610,8 +606,8 @@
                     const audioHtml = bacaan.audio_url
                         ? `<div class="audio-player">
                                <div class="audio-controls">
-                                   <button class="audio-btn" id="playBtn_${index}" type="button" aria-label="Putar audio">▶</button>
-                                   <button class="audio-btn" id="replayBtn_${index}" type="button" aria-label="Putar ulang" style="font-size: 16px;">↺</button>
+                                   <button class="audio-btn" id="playBtn_${index}" type="button" aria-label="Putar audio">?</button>
+                                   <button class="audio-btn" id="replayBtn_${index}" type="button" aria-label="Putar ulang" style="font-size: 16px;">?</button>
                                    <div class="audio-progress-wrapper">
                                        <div class="audio-progress" id="progress_${index}">
                                            <div class="audio-progress-bar" id="progressBar_${index}"></div>
@@ -674,7 +670,7 @@
             });
 
             audio.addEventListener("ended", () => {
-                playBtn.textContent = "▶";
+                playBtn.textContent = "?";
                 playBtn.setAttribute("aria-label", "Putar audio");
                 if (progressBar) {
                     progressBar.style.width = "0%";
@@ -697,7 +693,7 @@
                         a.pause();
                         const otherBtn = document.getElementById(`playBtn_${i}`);
                         if (otherBtn) {
-                            otherBtn.textContent = "▶";
+                            otherBtn.textContent = "?";
                             otherBtn.setAttribute("aria-label", "Putar audio");
                         }
                     }
@@ -705,11 +701,11 @@
 
                 if (audio.paused) {
                     audio.play();
-                    playBtn.textContent = "⏸";
+                    playBtn.textContent = "??";
                     playBtn.setAttribute("aria-label", "Jeda audio");
                 } else {
                     audio.pause();
-                    playBtn.textContent = "▶";
+                    playBtn.textContent = "?";
                     playBtn.setAttribute("aria-label", "Putar audio");
                 }
             });
@@ -718,7 +714,7 @@
                 replayBtn.addEventListener("click", () => {
                     audio.currentTime = 0;
                     audio.play();
-                    playBtn.textContent = "⏸";
+                    playBtn.textContent = "??";
                     playBtn.setAttribute("aria-label", "Jeda audio");
                 });
             }
@@ -811,13 +807,6 @@
                 bacaanList.forEach((_, index) => {
                     setupAudioPlayer(index);
                 });
-
-                if (typeof setupAutoplayListeners === "function") {
-                    const firstAudio = document.getElementById("bacaanAudio") || document.querySelector("audio");
-                    if (firstAudio) {
-                        setupAutoplayListeners(firstAudio, gerakanId);
-                    }
-                }
 
                 if (gerakan.video_url) {
                     setupVideoModal(gerakan.video_url);

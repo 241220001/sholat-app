@@ -112,7 +112,7 @@ function renderState(title, message, icon = "□") {
     `;
 }
 
-function renderMovements(items) {
+function renderMovements(items, mode) {
     if (!movementGrid) {
         return;
     }
@@ -122,10 +122,12 @@ function renderMovements(items) {
         return;
     }
 
+    const currentMode = mode || getStoredMode();
+
     movementGrid.innerHTML = items
         .sort((first, second) => first.urutan - second.urutan)
         .map((item) => `
-            <a class="movement-card" href="detail-gerakan.html?id=${encodeURIComponent(item.id)}" aria-label="Gerakan ${item.urutan}: ${item.nama}, buka detail">
+            <a class="movement-card" href="detail-gerakan.html?id=${encodeURIComponent(item.id)}&kategori=${encodeURIComponent(currentMode)}" aria-label="Gerakan ${item.urutan}: ${item.nama}, buka detail">
                 <img class="movement-thumb" src="${item.gambar_url}" alt="Thumbnail gerakan ${item.nama}">
                 <span class="movement-card-body">
                     <span class="movement-order">${String(item.urutan).padStart(2, "0")}</span>
@@ -167,7 +169,7 @@ async function loadMovements(mode) {
     try {
         const items = await fetchMovements(mode);
         window.setTimeout(() => {
-            renderMovements(items);
+            renderMovements(items, mode);
             movementGrid.classList.remove("is-changing");
         }, 200);
     } catch (error) {

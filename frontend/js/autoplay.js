@@ -54,6 +54,14 @@ function updateAutoplayUI(toggleButton, badge, enabled) {
     }
 }
 
+function setupAutoplayListeners(audioElement, currentId) {
+    if (!audioElement) {
+        return;
+    }
+    setupAudioAutoplay(audioElement, currentId);
+    setupAudioEndedListener(audioElement, currentId);
+}
+
 function setupAudioAutoplay(audioElement, currentId) {
     if (!audioElement || !isAutoplayEnabled()) {
         return;
@@ -134,10 +142,11 @@ function initAutoplay() {
             setAutoplayEnabled(newEnabled);
             updateAutoplayUI(toggleButton, badge, newEnabled);
 
-            if (newEnabled && audioElement && audioElement.paused) {
-                audioElement.play();
-            } else if (!newEnabled && audioElement && !audioElement.paused) {
-                audioElement.pause();
+            const audio = document.getElementById("bacaanAudio") || document.querySelector("audio");
+            if (newEnabled && audio && audio.paused) {
+                audio.play();
+            } else if (!newEnabled && audio && !audio.paused) {
+                audio.pause();
             }
         });
     }
