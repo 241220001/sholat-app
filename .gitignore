@@ -11,7 +11,7 @@ composer.lock
 .env
 .env.local
 .env.production
-config/database.php
+backend/config/database.php
 
 # ============================================
 # FILE SISTEM OPERASI

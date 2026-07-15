@@ -29,7 +29,14 @@ class Database {
             $this->conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // tambah ini
             $this->conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false); // tambah ini
         } catch (PDOException $e) {
-            die("PDO Error: " . $e->getMessage());
+            http_response_code(500);
+            header("Content-Type: application/json; charset=utf-8");
+            echo json_encode([
+                "status" => "error",
+                "message" => "Terjadi kesalahan koneksi database",
+                "code" => "DB_CONNECTION_ERROR"
+            ], JSON_UNESCAPED_UNICODE);
+            exit;
         }
     }
 

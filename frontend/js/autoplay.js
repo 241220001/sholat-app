@@ -4,22 +4,13 @@
  * - Toggle autoplay on/off
  * - Auto-play audio when page loads (if autoplay is enabled)
  * - Auto-advance to next gerakan when audio ends
- * - Stop automatically at gerakan 13
+ * - Stop automatically at gerakan 14
  * - Visual indicator when autoplay is active
  */
+// TOTAL_GERAKAN, getCurrentGerakanId(), getStoredMode() dipakai dari navigation.js
+// navigation.js WAJIB di-load SEBELUM autoplay.js di HTML
 
-const TOTAL_GERAKAN = 13;
 const AUTOPLAY_STORAGE_KEY = "autoplayEnabled";
-
-function getCurrentGerakanId() {
-    const params = new URLSearchParams(window.location.search);
-    const id = parseInt(params.get("id"), 10);
-    return !isNaN(id) && id >= 1 && id <= TOTAL_GERAKAN ? id : 1;
-}
-
-function getStoredMode() {
-    return sessionStorage.getItem("modeTampilan") || localStorage.getItem("modeTampilan") || "dewasa";
-}
 
 function isAutoplayEnabled() {
     return sessionStorage.getItem(AUTOPLAY_STORAGE_KEY) === "true";
@@ -61,6 +52,14 @@ function updateAutoplayUI(toggleButton, badge, enabled) {
             badge.removeAttribute("aria-label");
         }
     }
+}
+
+function setupAutoplayListeners(audioElement, currentId) {
+    if (!audioElement) {
+        return;
+    }
+    setupAudioAutoplay(audioElement, currentId);
+    setupAudioEndedListener(audioElement, currentId);
 }
 
 function setupAudioAutoplay(audioElement, currentId) {
@@ -143,10 +142,9 @@ function initAutoplay() {
             setAutoplayEnabled(newEnabled);
             updateAutoplayUI(toggleButton, badge, newEnabled);
 
-            if (newEnabled && audioElement && audioElement.paused) {
-                audioElement.play();
-            } else if (!newEnabled && audioElement && !audioElement.paused) {
-                audioElement.pause();
+            const audio = document.getElementById("bacaanAudio") || document.querySelector("audio");
+            if (newEnabled && audio && audio.paused) {
+                audio.play();
             }
         });
     }
