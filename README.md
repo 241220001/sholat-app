@@ -132,18 +132,18 @@ Before installing, ensure you have:
 
 ### Required
 
-- [ ] XAMPP (or any PHP+MySQL stack)
+- [✅] XAMPP (or any PHP+MySQL stack)
   - Apache server
   - MySQL database
   - PHP 7.4 or higher
-- [ ] Git (for cloning repository)
-- [ ] Modern web browser (Chrome/Firefox/Edge)
+- [✅] Git (for cloning repository)
+- [✅] Modern web browser (Chrome/Firefox/Edge)
 
 ### Optional
 
-- [ ] Postman (for API testing)
-- [ ] VS Code (recommended editor)
-- [ ] Node.js (if using build tools)
+- [✅] Postman (for API testing)
+- [✅] VS Code (recommended editor)
+- [✅] Node.js (if using build tools)
 
 ---
 
@@ -488,18 +488,18 @@ Test frontend functionality:
 
 ### Test Checklist
 
-- [ ] Health endpoint returns 200
-- [ ] Kelompok returns group info
-- [ ] Gerakan list returns 13 items per kategori
-- [ ] Gerakan detail returns complete data
-- [ ] Next/Prev navigation works
-- [ ] Bacaan returns readings array
-- [ ] Autoplay returns nested data structure
-- [ ] Error responses follow standard format
-- [ ] Frontend loads correctly
-- [ ] Mode toggle switches content
-- [ ] Audio plays correctly
-- [ ] Responsive layout works on mobile/tablet
+- [✅] Health endpoint returns 200
+- [✅] Kelompok returns group info
+- [✅] Gerakan list returns 13 items per kategori
+- [✅] Gerakan detail returns complete data
+- [✅] Next/Prev navigation works
+- [✅] Bacaan returns readings array
+- [✅] Autoplay returns nested data structure
+- [✅] Error responses follow standard format
+- [✅] Frontend loads correctly
+- [✅] Mode toggle switches content
+- [✅] Audio plays correctly
+- [✅] Responsive layout works on mobile/tablet
 
 ---
 
@@ -668,10 +668,11 @@ echo $e->getMessage();
 
 | Role | Name | NIM |
 |------|------|-----|
-| Backend Developer | [Your Name] | [Your NIM] |
-| Frontend Developer | [Name] | [NIM] |
-| Database Engineer | [Name] | [NIM] |
-| UI/UX Designer | [Name] | [NIM] |
+| Ketua| [Abimanyu Borneo Putra] | [241220029] |
+| Backend Developer | [Nabil Fernanda Azziqra] | [241220002] |
+| Frontend Developer | [Muhammad Rifky Novriza] | [241220001] |
+| Database Engineer | [Dichy Rahmadi] | [241220107] |
+| Media | [Rafikah Fitri Anjani] | [241220079] |
 
 **Course:** AIK 4 - Pengembangan Aplikasi Web  
 **Institution:** Program Studi Manajemen Bisnis Syariah · FAI · Universitas Muhammadiyah Pontianak  
