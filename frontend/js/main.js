@@ -9,7 +9,7 @@ const groupFields = {
     dosen: document.getElementById("groupLecturer"),
 };
 
-// MOCK DATA - ganti ke fetch() asli setelah backend/api/gerakan.php selesai
+
 const mockGerakan = [
 { id: 1, nama: "Qiyam", urutan: 1, deskripsi: "Berdiri tegak menghadap kiblat sebelum memulai sholat.", gambar_url: "/assets/img/Qiyam (Dewasa).jpeg", video_url: null },
     { id: 2, nama: "Takbiratul Ihram", urutan: 2, deskripsi: "Mengangkat kedua tangan dan membaca takbir pembuka sholat.", gambar_url: "/assets/img/Takbiratul Ihram (Dewasa).jpeg", video_url: null },
