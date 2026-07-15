@@ -23,7 +23,25 @@ const mockGerakan = [
     { id: 10, nama: "Berdiri Rakaat Berikutnya", urutan: 10, deskripsi: "Bangkit berdiri untuk melanjutkan rakaat berikutnya.", gambar_url: "/assets/img/Qiyam (Dewasa).jpeg", video_url: null },
     { id: 11, nama: "Tasyahud Awal", urutan: 11, deskripsi: "Duduk membaca tasyahud awal pada rakaat kedua.", gambar_url: "/assets/img/Tahiyat (Dewasa).jpeg", video_url: null },
     { id: 12, nama: "Tasyahud Akhir", urutan: 12, deskripsi: "Duduk akhir sebelum menutup sholat dengan salam.", gambar_url: "/assets/img/Tahiyat (Dewasa).jpeg", video_url: null },
-    { id: 13, nama: "Salam", urutan: 13, deskripsi: "Menoleh ke kanan dan kiri untuk mengakhiri sholat.", gambar_url: "/assets/img/Salam kiri (Dewasa).jpeg", video_url: null },
+    { id: 13, nama: "Salam Kanan", urutan: 13, deskripsi: "Menoleh ke kanan untuk mengakhiri sholat.", gambar_url: "/assets/img/Salam kanan(Dewasa).jpeg", video_url: null },
+    { id: 14, nama: "Salam Kiri", urutan: 14, deskripsi: "Menoleh ke kiri untuk mengakhiri sholat.", gambar_url: "/assets/img/Salam kiri (Dewasa).jpeg", video_url: null },
+];
+
+const mockGerakanAnak = [
+    { id: 1, nama: "Qiyam", urutan: 1, deskripsi: "Berdiri tegak menghadap kiblat sebelum memulai sholat.", gambar_url: "/assets/img/Qiyam (Anak).png", video_url: null },
+    { id: 2, nama: "Takbiratul Ihram", urutan: 2, deskripsi: "Mengangkat kedua tangan dan membaca takbir pembuka sholat.", gambar_url: "/assets/img/Takbiratul Ihram (Anak).png", video_url: null },
+    { id: 3, nama: "Bersedekap", urutan: 3, deskripsi: "Meletakkan tangan kanan di atas tangan kiri saat berdiri.", gambar_url: "/assets/img/Qiyam (Anak).png", video_url: null },
+    { id: 4, nama: "Berdiri Baca Al-Fatihah", urutan: 4, deskripsi: "Membaca Al-Fatihah dan bacaan sholat saat berdiri.", gambar_url: "/assets/img/Qiyam (Anak).png", video_url: null },
+    { id: 5, nama: "Rukuk", urutan: 5, deskripsi: "Membungkukkan badan dengan punggung rata dan tumakninah.", gambar_url: "/assets/img/Ruku' (Anak).png", video_url: null },
+    { id: 6, nama: "I'tidal", urutan: 6, deskripsi: "Bangkit dari rukuk hingga berdiri tegak kembali.", gambar_url: "/assets/img/I'tidal (Anak).png", video_url: null },
+    { id: 7, nama: "Sujud Pertama", urutan: 7, deskripsi: "Sujud pertama dengan tujuh anggota sujud menempel tempat sujud.", gambar_url: "/assets/img/Sujud (Anak).png", video_url: null },
+    { id: 8, nama: "Duduk Antara Dua Sujud", urutan: 8, deskripsi: "Duduk iftirasy sejenak di antara dua sujud.", gambar_url: "/assets/img/Tahiyat (Anak).png", video_url: null },
+    { id: 9, nama: "Sujud Kedua", urutan: 9, deskripsi: "Sujud kedua dengan tumakninah sebelum bangkit.", gambar_url: "/assets/img/Sujud (Anak).png", video_url: null },
+    { id: 10, nama: "Berdiri Rakaat Berikutnya", urutan: 10, deskripsi: "Bangkit berdiri untuk melanjutkan rakaat berikutnya.", gambar_url: "/assets/img/Takbiratul Ihram (Anak).png", video_url: null },
+    { id: 11, nama: "Tasyahud Awal", urutan: 11, deskripsi: "Duduk membaca tasyahud awal pada rakaat kedua.", gambar_url: "/assets/img/Tahiyat (Anak).png", video_url: null },
+    { id: 12, nama: "Tasyahud Akhir", urutan: 12, deskripsi: "Duduk akhir sebelum menutup sholat dengan salam.", gambar_url: "/assets/img/Tahiyat (Anak).png", video_url: null },
+    { id: 13, nama: "Salam Kanan", urutan: 13, deskripsi: "Menoleh ke kanan untuk mengakhiri sholat.", gambar_url: "/assets/img/Salam Kanan (Anak).png", video_url: null },
+    { id: 14, nama: "Salam Kiri", urutan: 14, deskripsi: "Menoleh ke kiri untuk mengakhiri sholat.", gambar_url: "/assets/img/Salam kiri (Anak).png", video_url: null },
 ];
 
 function getStoredMode() {
@@ -82,7 +100,7 @@ function renderSkeleton() {
         return;
     }
 
-    movementGrid.innerHTML = Array.from({ length: 13 }, () => `
+    movementGrid.innerHTML = Array.from({ length: 14 }, () => `
         <article class="skeleton-card" aria-hidden="true">
             <div class="skeleton-layout">
                 <div class="skeleton-thumb"></div>
@@ -150,8 +168,9 @@ async function fetchMovements(mode) {
 
         return payload.data;
     } catch (error) {
-        if (mockGerakan.length) {
-            return mockGerakan;
+        const fallback = mode === "anak" ? mockGerakanAnak : mockGerakan;
+        if (fallback.length) {
+            return fallback;
         }
 
         throw error;

@@ -4,7 +4,7 @@
  * - Toggle autoplay on/off
  * - Auto-play audio when page loads (if autoplay is enabled)
  * - Auto-advance to next gerakan when audio ends
- * - Stop automatically at gerakan 13
+ * - Stop automatically at gerakan 14
  * - Visual indicator when autoplay is active
  */
 // TOTAL_GERAKAN, getCurrentGerakanId(), getStoredMode() dipakai dari navigation.js
@@ -145,8 +145,6 @@ function initAutoplay() {
             const audio = document.getElementById("bacaanAudio") || document.querySelector("audio");
             if (newEnabled && audio && audio.paused) {
                 audio.play();
-            } else if (!newEnabled && audio && !audio.paused) {
-                audio.pause();
             }
         });
     }

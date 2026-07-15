@@ -31,6 +31,17 @@ class Gerakan {
         return $row ?: null;
     }
 
+    public static function findByUrutanAndKategori($urutan, $idKategori) {
+        $db = Database::getConnection();
+        $stmt = $db->prepare('SELECT id, id_kategori, nama, urutan, deskripsi, gambar_url, video_url
+                              FROM gerakan
+                              WHERE urutan = :urutan AND id_kategori = :id_kategori
+                              LIMIT 1');
+        $stmt->execute(['urutan' => $urutan, 'id_kategori' => $idKategori]);
+        $row = $stmt->fetch();
+        return $row ?: null;
+    }
+
     public static function resolveKategoriId($kategoriNama) {
         $db = Database::getConnection();
         $stmt = $db->prepare('SELECT id FROM kategori WHERE nama = :nama LIMIT 1');

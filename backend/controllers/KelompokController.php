@@ -8,7 +8,7 @@ class KelompokController {
             $kelompok = Kelompok::getInfo();
             
             if (!$kelompok) {
-                Response::error("Data kelompok belum tersedia", "KELOMPOK_NOT_CONFIGURED", 500);
+                Response::error("Data kelompok belum tersedia", "KELOMPOK_NOT_CONFIGURED", 404);
             }
             
             Response::success($kelompok);
