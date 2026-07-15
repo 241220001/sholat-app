@@ -61,7 +61,7 @@ CREATE TABLE gerakan (
     ON DELETE RESTRICT ON UPDATE CASCADE,
 
   CONSTRAINT uq_kategori_urutan UNIQUE (id_kategori, urutan),
-  CONSTRAINT chk_gerakan_urutan CHECK (urutan BETWEEN 1 AND 13),
+  CONSTRAINT chk_gerakan_urutan CHECK (urutan BETWEEN 1 AND 14),
 
   INDEX idx_kategori_urutan (id_kategori, urutan)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

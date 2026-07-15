@@ -1,22 +1,15 @@
 # Deny access to all PHP files by default
 <FilesMatch "\.php$">
-    Order Deny,Allow
-    Deny from all
+    Require all denied
 </FilesMatch>
 
 # Allow access only to API endpoint files
 <FilesMatch "^(bacaan|gerakan|health|kelompok)\.php$">
-    Order Allow,Deny
-    Allow from all
+    Require all granted
 </FilesMatch>
 
 # Prevent directory listing
 Options -Indexes
-
-# Disable PHP file execution in uploads directory (if added in future)
-<Directory "../../assets/">
-    php_flag engine off
-</Directory>
 
 # Set UTF-8 charset for JSON responses
 AddDefaultCharset UTF-8
@@ -37,6 +30,5 @@ ServerSignature Off
 
 # Prevent access to sensitive files
 <FilesMatch "(^\.htaccess|\.env|\.git|\.sql|composer\.(json|lock)|package\.json)$">
-    Order Deny,Allow
-    Deny from all
+    Require all denied
 </FilesMatch>
