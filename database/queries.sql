@@ -60,7 +60,7 @@ WHERE id_kategori = :id_kategori AND urutan < :urutan_sekarang
 ORDER BY urutan DESC
 LIMIT 1;
 
--- (h) Total jumlah gerakan (indikator "gerakan X dari 13")
+-- (h) Total jumlah gerakan (indikator "gerakan X dari 14")
 SELECT COUNT(*) AS total_gerakan
 FROM gerakan
 WHERE id_kategori = :id_kategori;
