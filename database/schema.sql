@@ -18,6 +18,7 @@ USE tuntunan_sholat;
 -- Tabel: kelompok
 -- Idealnya hanya berisi 1 baris (identitas header)
 -- ------------------------------------------------------------
+DROP TABLE IF EXISTS kelompok;
 CREATE TABLE kelompok (
   id            INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   nama_kelompok VARCHAR(100) NOT NULL,
@@ -33,6 +34,7 @@ CREATE TABLE kelompok (
 -- Tabel: kategori
 -- Nilai tetap: id=1 'dewasa', id=2 'anak'
 -- ------------------------------------------------------------
+DROP TABLE IF EXISTS kategori;
 CREATE TABLE kategori (
   id   INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   nama VARCHAR(20) NOT NULL,
@@ -44,6 +46,7 @@ CREATE TABLE kategori (
 -- Tabel: gerakan
 -- Satu baris per gerakan sholat per kategori
 -- ------------------------------------------------------------
+DROP TABLE IF EXISTS gerakan;
 CREATE TABLE gerakan (
   id           INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   id_kategori  INT UNSIGNED NOT NULL,
@@ -70,6 +73,7 @@ CREATE TABLE gerakan (
 -- Tabel: bacaan
 -- Satu gerakan bisa punya 0..N bacaan (relasi opsional)
 -- ------------------------------------------------------------
+DROP TABLE IF EXISTS bacaan;
 CREATE TABLE bacaan (
   id           INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   id_gerakan   INT UNSIGNED NOT NULL,
