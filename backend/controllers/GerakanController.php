@@ -37,7 +37,17 @@ class GerakanController {
         $id = (int)$id;
         
         try {
-            $gerakan = Gerakan::findById($id);
+            $kategori = $_GET['kategori'] ?? null;
+            
+            if ($kategori && in_array($kategori, ['dewasa', 'anak'])) {
+                $idKategori = Gerakan::resolveKategoriId($kategori);
+                if (!$idKategori) {
+                    Response::error("Kategori tidak ditemukan", "KATEGORI_NOT_FOUND", 404);
+                }
+                $gerakan = Gerakan::findByUrutanAndKategori($id, $idKategori);
+            } else {
+                $gerakan = Gerakan::findById($id);
+            }
             
             if (!$gerakan) {
                 Response::error("Gerakan tidak ditemukan", "GERAKAN_NOT_FOUND", 404);

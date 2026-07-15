@@ -3,11 +3,11 @@
  * Handles Next/Previous navigation between gerakan detail pages (F-05)
  * - Reads current gerakan ID from URL
  * - Navigates to next/previous gerakan
- * - Disables buttons at boundaries (gerakan 1 and 13)
+ * - Disables buttons at boundaries (gerakan 1 and 14)
  * - Preserves mode (dewasa/anak) across navigation
  */
 
-const TOTAL_GERAKAN = 13;
+const TOTAL_GERAKAN = 14;
 
 function getCurrentGerakanId() {
     const params = new URLSearchParams(window.location.search);
